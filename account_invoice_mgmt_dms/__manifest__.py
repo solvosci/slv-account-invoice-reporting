@@ -5,7 +5,7 @@
     "summary": """
         Adds the possibility to read Invoice data from local to dms for bind and upload
     """,
-    "version": "13.0.1.5.0",
+    "version": "13.0.1.6.0",
     "category": "Accounting & Finance",
     "website": "https://github.com/solvosci/slv-account",
     "author": "Solvos",
@@ -33,6 +33,7 @@
         "wizards/account_move_dms_file_wizard_view.xml",
         "wizards/dms_file_decline_account_move_wizard_view.xml",
         "wizards/account_move_dms_extra_file_wizard_views.xml",
+        "wizards/account_move_assign_massive_confirm_wizard_view.xml",
     ],
     "external_dependencies": {"python": ["pytesseract", "pdf2image"]},
 }

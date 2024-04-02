@@ -153,9 +153,22 @@ class AccountMove(models.Model):
         if not self.env.user.has_group("account_invoice_mgmt_dms.group_invoice_approver"):
             raise ValidationError(_("You don't have permission to approve invoices."))
 
-        invoice_ids = self.env["account.move"].browse(self._context.get("active_ids", []))
-        for record in invoice_ids.filtered(lambda x: x.complete_proceesing_id and x.complete_proceesing_id.state_account_move == 'pending'):
-            record.complete_proceesing_id.approve_account_move()
+        active_ids = self.env["account.move"].browse(self._context.get("active_ids", []))
+        invoice_ids = active_ids.filtered(lambda x: x.complete_proceesing_id and x.complete_proceesing_id.state_account_move == 'pending')
+
+        Wizard = self.env['account.move.assign.massive.confirm.wizard']
+        new = Wizard.create({
+            'invoice_ids': invoice_ids,
+        })
+        return {
+            'name': _('Are you sure you want to approve the following invoices?'),
+            'res_model': 'account.move.assign.massive.confirm.wizard',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_id': new.id,
+            'target': 'new',
+            'type': 'ir.actions.act_window',
+        }
 
     def action_download_purchase_invoice(self):
         invoice_ids = self.env['account.move'].browse(self._context.get("active_ids", [])).filtered(lambda x: x.purchase_invoice_proceesing_id)
