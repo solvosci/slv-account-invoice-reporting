@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_payment_partner_address" inherit_id="account_check_printing_report_base.report_check_base_a4" priority="999">
+            <xpath expr="//address[@t-field='o.partner_id']" position="attributes">
+                <attribute name="t-field">o.payment_partner_id</attribute>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
