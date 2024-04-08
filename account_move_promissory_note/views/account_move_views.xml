@@ -7,8 +7,8 @@
         <field name="inherit_id" ref="account.view_invoice_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="after">
-                <field name="promissory_note_number" />
-                <field name="payment_date" />
+                <field name="promissory_note_number" optional="hide" />
+                <field name="payment_date" optional="hide"/>
             </xpath>
         </field>
     </record>
