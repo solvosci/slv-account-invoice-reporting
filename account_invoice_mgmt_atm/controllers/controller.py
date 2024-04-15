@@ -105,8 +105,8 @@ class AddonCajeroHttp(http.Controller):
                 _logger.info(('ATM Payment successful: payment_id:%s invoice_id:%s quantity:%s') % (account_payment_temp.id, account_invoice_id.id, amount))
                 return str({'retRegistro': True})
             else:
-                _logger.error(('ATM Payment failed alredy exist a payment_ATM_id: %s') % (payment_ATM_id))
-                return str({'retRegistro': False})
+                _logger.warning(('ATM Payment failed alredy exist a payment_ATM_id: %s. It will be ignored') % (payment_ATM_id))
+                return str({'retRegistro': True})
         except Exception as e:
             _logger.error(e)
             return str({'retRegistro': False})
