@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 11:19+0000\n"
-"PO-Revision-Date: 2024-04-02 11:19+0000\n"
+"POT-Creation-Date: 2024-04-24 08:27+0000\n"
+"PO-Revision-Date: 2024-04-24 08:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,6 @@ msgstr ""
 #. module: account_invoice_mgmt_dms
 #: model:ir.actions.server,name:account_invoice_mgmt_dms.action_account_move_approve_complete_processing
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_massive_confirm_wizard_view_form
-#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_mavise_confirm_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_dms_file_form_inherit
 msgid "Approve"
 msgstr ""
@@ -95,7 +94,6 @@ msgstr ""
 
 #. module: account_invoice_mgmt_dms
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_massive_confirm_wizard_view_form
-#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_mavise_confirm_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_dms_extra_file_wizard
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_dms_file_wizard
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_dms_file_decline_account_move_wizard
@@ -230,6 +228,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_dms_file__state_account_move
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_search_inherit
 msgid "Doc State"
+msgstr ""
+
+#. module: account_invoice_mgmt_dms
+#: model:ir.actions.server,name:account_invoice_mgmt_dms.action_account_move_download_complete_proceesing
+msgid "Download Complete Proceesing"
 msgstr ""
 
 #. module: account_invoice_mgmt_dms
@@ -483,11 +486,6 @@ msgid "account.move.assign.massive.confirm.wizard"
 msgstr ""
 
 #. module: account_invoice_mgmt_dms
-#: model:ir.model,name:account_invoice_mgmt_dms.model_account_move_assign_mavise_confirm_wizard
-msgid "account.move.assign.mavise.confirm.wizard"
-msgstr ""
-
-#. module: account_invoice_mgmt_dms
 #: model:ir.model,name:account_invoice_mgmt_dms.model_account_move_dms_extra_file_wizard
 msgid "account.move.dms.extra.file.wizard"
 msgstr ""
@@ -495,6 +493,12 @@ msgstr ""
 #. module: account_invoice_mgmt_dms
 #: model:ir.model,name:account_invoice_mgmt_dms.model_account_move_dms_file_wizard
 msgid "account.move.dms.file.wizard"
+msgstr ""
+
+#. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/controllers/main.py:0
+#, python-format
+msgid "complete_proceesing"
 msgstr ""
 
 #. module: account_invoice_mgmt_dms

@@ -169,18 +169,25 @@ class AccountMove(models.Model):
             'target': 'new',
             'type': 'ir.actions.act_window',
         }
-
-    def action_download_purchase_invoice(self):
-        invoice_ids = self.env['account.move'].browse(self._context.get("active_ids", [])).filtered(lambda x: x.purchase_invoice_proceesing_id)
+    
+    def action_download_document(self,field_name,url_field):
+        invoice_ids = self.env['account.move'].browse(self._context.get("active_ids", [])).filtered(lambda x: getattr(x, field_name))
         invoice_ids = [str(id) for id in invoice_ids.ids]
         if invoice_ids:
-            url = '/account_invoice_mgmt_dms/download_purchase_invoice?ids=%s' % ','.join(invoice_ids)
+            url = '/account_invoice_mgmt_dms/%s?ids=%s' % (url_field,','.join(invoice_ids))
             return {
                 'type': 'ir.actions.act_url',
                 'url': url,
                 'target': 'new',
             }
         else:
-           raise ValidationError(
+            raise ValidationError(
                     _("No selected invoice has the supplier invoice stored")
                 )
+        
+    def action_download_purchase_invoice(self):
+        return self.action_download_document('purchase_invoice_proceesing_id', 'download_purchase_invoice')
+    
+    def action_download_complete_proceesing(self):
+        return self.action_download_document('complete_proceesing_id', 'download_complete_proceesing')
+
