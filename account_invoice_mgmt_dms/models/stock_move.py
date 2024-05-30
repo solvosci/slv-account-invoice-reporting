@@ -8,6 +8,7 @@ class StockMove(models.Model):
     _inherit = 'stock.move'
 
     carrier_doc_count = fields.Integer(compute="_compute_carrier_doc_count")
+    with_doc = fields.Boolean(default=False, copy=False, readonly=True)
 
     def _compute_carrier_doc_count(self):
         directory_id = self.env.ref("account_invoice_mgmt_dms.dms_directory_carrier_doc").id
