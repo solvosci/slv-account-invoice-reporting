@@ -27,4 +27,15 @@
         </field>
     </record>
 
+    <record id="view_stock_move_weight_dms_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.move.tree.dms.inherited</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock_picking_mgmt_weight.stock_move_mgmt_weight_frontend_weight_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_towing_license_plate']" position="after">
+                <field name="dms_file_ids" />
+            </xpath>
+        </field>
+    </record>
+
 </odoo>
