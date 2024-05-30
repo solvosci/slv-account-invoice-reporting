@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-24 08:27+0000\n"
-"PO-Revision-Date: 2024-04-24 08:27+0000\n"
+"POT-Creation-Date: 2024-08-26 08:32+0000\n"
+"PO-Revision-Date: 2024-08-26 08:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,7 @@ msgstr "Factura"
 
 #. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #, python-format
 msgid "Add Extra Docs"
 msgstr "Adjuntar documentos adicionales"
@@ -43,6 +44,7 @@ msgid "Add Extra Documents"
 msgstr "Adjuntar documentos adicionales"
 
 #. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_dms_file_wizard
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_form_inherit
@@ -58,6 +60,7 @@ msgstr "Permite aprobar o rechazar facturas"
 #. module: account_invoice_mgmt_dms
 #: model:ir.actions.server,name:account_invoice_mgmt_dms.action_account_move_approve_complete_processing
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_massive_confirm_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_mavise_confirm_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_dms_file_form_inherit
 msgid "Approve"
 msgstr "Aprobar"
@@ -76,6 +79,7 @@ msgid "Approved"
 msgstr "Aprobada"
 
 #. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #, python-format
 msgid "Are you sure you want to approve the following invoices?"
@@ -96,6 +100,7 @@ msgstr "Antes de efectuar el pago, deben aprobarse las siguientes facturas: %s"
 
 #. module: account_invoice_mgmt_dms
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_massive_confirm_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_mavise_confirm_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_dms_extra_file_wizard
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_dms_file_wizard
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_dms_file_decline_account_move_wizard
@@ -114,6 +119,7 @@ msgstr ""
 "- %s"
 
 #. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/stock_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/stock_move.py:0
 #, python-format
 msgid "Carrier Doc"
@@ -153,6 +159,7 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_form_inherit
 #, python-format
@@ -338,6 +345,7 @@ msgstr "Guardar"
 
 #. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/stock_move.py:0
+#: code:addons/account_invoice_mgmt_dms/models/stock_move.py:0
 #, python-format
 msgid "Link Scale Weight with DMS"
 msgstr "Adjuntar documentación trasporte"
@@ -354,12 +362,14 @@ msgstr "Administrador"
 
 #. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/account_payment.py:0
 #, python-format
 msgid "Must be approved before making payment"
 msgstr "Debe aprobarse la factura antes de efectuar el pago"
 
 #. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #, python-format
 msgid "No selected invoice has the supplier invoice stored"
@@ -479,6 +489,18 @@ msgid "Very Hight"
 msgstr "Muy alta"
 
 #. module: account_invoice_mgmt_dms
+#: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_stock_move__with_doc
+#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_move_search
+msgid "With Doc"
+msgstr "Con documentación"
+
+#. module: account_invoice_mgmt_dms
+#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_move_search
+msgid "Without Doc"
+msgstr "Sin documentación"
+
+#. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #, python-format
 msgid "You don't have permission to approve invoices."
@@ -487,6 +509,11 @@ msgstr "No tiene permiso para aprobar facturas."
 #. module: account_invoice_mgmt_dms
 #: model:ir.model,name:account_invoice_mgmt_dms.model_account_move_assign_massive_confirm_wizard
 msgid "account.move.assign.massive.confirm.wizard"
+msgstr ""
+
+#. module: account_invoice_mgmt_dms
+#: model:ir.model,name:account_invoice_mgmt_dms.model_account_move_assign_mavise_confirm_wizard
+msgid "account.move.assign.mavise.confirm.wizard"
 msgstr ""
 
 #. module: account_invoice_mgmt_dms

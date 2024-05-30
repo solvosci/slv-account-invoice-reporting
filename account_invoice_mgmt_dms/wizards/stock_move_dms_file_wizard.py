@@ -25,3 +25,4 @@ class AccountMoveDmsFileWizard(models.TransientModel):
             'directory_id': directory_id.id,
             'proceeding': self.ticket_name,
         })
+        self.stock_move_id.with_doc = True

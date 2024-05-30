@@ -54,3 +54,13 @@ class DmsFile(models.Model):
             'target': 'new',
             'type': 'ir.actions.act_window',
         }
+
+    def unlink(self):
+        directory_id = self.env.ref('account_invoice_mgmt_dms.dms_directory_carrier_doc', raise_if_not_found=False)
+        if directory_id:
+            for record in self.filtered(lambda x: x.directory_id == directory_id):
+                move_id = self.env['stock.move'].sudo().search([('picking_id.name', '=', record.proceeding)])
+                if move_id.carrier_doc_count == 1:
+                    move_id.with_doc = False
+        return super(DmsFile, self).unlink()
+
