@@ -5,6 +5,9 @@ from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 import base64
 import io
+import ghostscript
+import os
+import tempfile
 
 
 class AccountMove(models.Model):
@@ -132,15 +135,39 @@ class AccountMove(models.Model):
 
         attachment = self.env['ir.actions.report']._merge_pdfs(streams)
 
+        # Save the PDF to a temporary file
+        with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_pdf:
+            temp_pdf.write(attachment)
+            temp_pdf_path = temp_pdf.name
+
+        # Compress PDF using Ghostscript
+        compressed_pdf_path = temp_pdf_path.replace('.pdf', '_compressed.pdf')
+        args = [
+            "ps2pdf",
+            "-dNOPAUSE", "-dBATCH", "-dSAFER",
+            "-sDEVICE=pdfwrite",
+            "-sOutputFile=" + compressed_pdf_path,
+            temp_pdf_path
+        ]
+        ghostscript.Ghostscript(*args)
+
+        # Read the compressed PDF and encode it in base64
+        with open(compressed_pdf_path, 'rb') as f:
+            encoded_content = base64.b64encode(f.read())
+
         self.env['dms.file'].create({
             'name': 'DOC_%s.pdf' % (self.name).replace("/", ""),
-            'content': base64.b64encode(attachment),
+            'content': encoded_content,
             'directory_id': directory_id.id,
             'proceeding': proceeding,
             'account_move_id': self.id,
             'state_account_move': 'pending',
             'complete_proceeding': True,
         })
+
+        # Cleaning temporary files
+        os.remove(temp_pdf_path)
+        os.remove(compressed_pdf_path)
 
     def action_invoice_register_payment(self):
         if self.state_complete_proceesing in ['pending', 'declined']:
