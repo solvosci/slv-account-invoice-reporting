@@ -35,5 +35,5 @@
         "wizards/account_move_dms_extra_file_wizard_views.xml",
         "wizards/account_move_assign_massive_confirm_wizard_view.xml",
     ],
-    "external_dependencies": {"python": ["pytesseract", "pdf2image"]},
+    "external_dependencies": {"python": ["pytesseract", "pdf2image", "ghostscript"]},
 }
