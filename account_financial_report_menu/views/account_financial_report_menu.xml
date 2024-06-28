@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_financial_report.menu_oca_reports" model="ir.ui.menu">
+        <!-- Overriden: account.menu_finance_reports -->
+        <field name="parent_id" ref="account.menu_finance_entries" />
+    </record>
+
+</odoo>
