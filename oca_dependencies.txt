@@ -1,5 +1,6 @@
 account-invoicing
 account-invoice-reporting
+account-financial-reporting
 account-payment
 bank-payment
 server-auth
