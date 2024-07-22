@@ -1,0 +1,1 @@
+- Change the menu position "Invoicing/Configuration/Analytic Defaults" to "Invoicing/Accounting/Management/Analytic Defaults"
