@@ -13,7 +13,7 @@ class StockMove(models.Model):
     def _compute_carrier_doc_count(self):
         directory_id = self.env.ref("account_invoice_mgmt_dms.dms_directory_carrier_doc").id
         for record in self:
-            record.carrier_doc_count = len(self.env['dms.file'].search([("proceeding", "=", self.picking_id.name), ("directory_id", "=", directory_id)]))
+            record.carrier_doc_count = len(self.env['dms.file'].search([("proceeding", "=", record.picking_id.name), ("directory_id", "=", directory_id)]))
 
     def open_wizard_dms_file(self):
         Wizard = self.env['stock.move.dms.file.wizard']
