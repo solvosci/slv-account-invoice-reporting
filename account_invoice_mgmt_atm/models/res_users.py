@@ -4,8 +4,7 @@
 from odoo import models, fields
 
 
-class ResCompany(models.Model):
-    _inherit = 'res.company'
+class ResUsers(models.Model):
+    _inherit = 'res.users'
 
-    # TODO: Deprecated field
-    journal_ATM_id = fields.Many2one('account.journal', string='ATM journal')
+    journal_ATM_id = fields.Many2one('account.journal', string='ATM Journal')

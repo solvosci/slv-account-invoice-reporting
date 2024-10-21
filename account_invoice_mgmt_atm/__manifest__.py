@@ -7,7 +7,7 @@
     """,
     "author": "Solvos",
     "license": "LGPL-3",
-    "version": "13.0.1.2.1",
+    "version": "13.0.1.3.0",
     "category": "stock",
     "website": "https://github.com/solvosci/slv-account",
     "depends": [
@@ -23,7 +23,8 @@
         "views/account_move_view.xml",
         "views/account_payment_views.xml",
         "views/purchase_order_view.xml",
-        "views/res_company_views.xml",
+        "views/res_users_views.xml",
+        # "views/res_company_views.xml",
     ],
     "installable": True,
 }
