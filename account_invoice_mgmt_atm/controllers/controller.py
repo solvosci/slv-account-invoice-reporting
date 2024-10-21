@@ -60,7 +60,8 @@ class AddonCajeroHttp(http.Controller):
     @http.route('/cajero/EmisionCompletadaReciclaje', type='http', auth='api_key', methods=['GET', 'POST'], csrf=False)
     def cajero_emision_completada_reciclaje(self, *args, **post):
         try:
-            res_company_id = request.env["res.users"].browse(request.uid).company_id
+            user_id = request.env["res.users"].browse(request.uid)
+            res_company_id = user_id.company_id
             json_data = request.httprequest.data
             json_data = json.loads(json_data.decode('utf-8'))
             #region
@@ -79,7 +80,7 @@ class AddonCajeroHttp(http.Controller):
             amount = int(json_data["parImporte"])/100
             atm_id = json_data["parCajero"] #NU
             payment_type = json_data["parFormaPago"]
-            payment_ATM_id = json_data["parIdPago"]
+            payment_ATM_id = f"{user_id.id}_{json_data['parIdPago']}"
             check_number = json_data["parNumeroCheque"]
 
             vals = {}
@@ -87,14 +88,17 @@ class AddonCajeroHttp(http.Controller):
             if not request.env["account.payment"].sudo().search([('payment_ATM_id', '=', payment_ATM_id)]):
                 typeofMove = "outbound"
                 vals.update({"partner_type": "supplier"})
-                payment_method_id = res_company_id.sudo().journal_ATM_id.outbound_payment_method_ids[0]
+                if not user_id.journal_ATM_id:
+                    _logger.warning(('User %s has no journal assigned') % (user_id.name))
+                    return str({'retRegistro': False})
+                payment_method_id = user_id.sudo().journal_ATM_id.outbound_payment_method_ids[0]
                 vals.update({
                     "atm_check": check_number,
                     "payment_type": typeofMove, #outbound
                     "payment_method_id": payment_method_id.id,
                     "amount": amount, #cantidad
                     "currency_id": res_company_id.currency_id.id, #outbound
-                    "journal_id": res_company_id.journal_ATM_id.id, #Cash
+                    "journal_id": user_id.journal_ATM_id.id, #Cash
                     "partner_id": account_invoice_id.partner_id.id, #Nicole
                     "communication": ('CAJERO-%s') % account_invoice_id.name, #Da un poco igual
                     "payment_ATM_id": payment_ATM_id, # Codigo cajero
