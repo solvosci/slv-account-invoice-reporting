@@ -95,16 +95,28 @@ class AccountMove(models.Model):
         wizard = self.open_wizard_dms('account.move.dms.extra.file.wizard')
         wizard['name'] = _('Add Extra Docs')
         return wizard
+    
+    def validation_files(self, dms_file):
+        error = ''            
+        try:
+            self.env['ir.actions.report']._merge_pdfs([io.BytesIO(dms_file.content_binary)])
+        except Exception as e:
+            error = '\n - %s' % dms_file.name
+        return error
 
     def create_dms_file_document_manager(self):
+        validate = self.env.context.get('create_dms_file_document_validate',False)
         directory_id = self.env.ref('account_invoice_mgmt_dms.dms_directory_complete_proceeding')
         # invoice_pdf = io.BytesIO(self.env.ref("account.account_invoices").render_qweb_pdf(self.id)[0])
 
         proceeding = ''
         streams = []
+        error = ''
         dms_file_purchase_invoice = self.dms_file_ids.filtered(lambda x: x.directory_id.id == self.env.ref('account_invoice_mgmt_dms.dms_directory_puchase_invoice').id)
         if dms_file_purchase_invoice:
             streams.append(io.BytesIO(dms_file_purchase_invoice.content_binary))
+            if validate:
+                error += self.validation_files(dms_file_purchase_invoice)
 
         # streams.append(invoice_pdf)
         for purchase_order_id in self.invoice_line_ids.purchase_line_id.order_id:
@@ -122,6 +134,8 @@ class AccountMove(models.Model):
             if dms_file_carrier_ids:
                 for doc_carrier in dms_file_carrier_ids:
                     streams.append(io.BytesIO(doc_carrier.content_binary))
+                    if validate:
+                        error += self.validation_files(doc_carrier)
 
         if not proceeding:
             proceeding = self.name
@@ -129,10 +143,15 @@ class AccountMove(models.Model):
         if dms_extra_ids:
             for doc_extra in dms_extra_ids:
                 streams.append(io.BytesIO(doc_extra.content_binary))
+                if validate:
+                    error += self.validation_files(doc_extra)
 
         if self.complete_proceesing_id:
             self.complete_proceesing_id.unlink()
 
+        if error:
+            raise ValidationError(_("Error in files: %s \n Must uploaded again") % error)
+        
         attachment = self.env['ir.actions.report']._merge_pdfs(streams)
 
         # Save the PDF to a temporary file
@@ -141,10 +160,11 @@ class AccountMove(models.Model):
             temp_pdf_path = temp_pdf.name
 
         # Compress PDF using Ghostscript
+        # https://ghostscript.readthedocs.io/en/gs10.04.0/VectorDevices.html
         compressed_pdf_path = temp_pdf_path.replace('.pdf', '_compressed.pdf')
         args = [
             "ps2pdf",
-            "-dNOPAUSE", "-dBATCH", "-dSAFER",
+            "-dNOPAUSE", "-dBATCH", "-dSAFER","-dPDFSETTINGS=/ebook",
             "-sDEVICE=pdfwrite",
             "-sOutputFile=" + compressed_pdf_path,
             temp_pdf_path

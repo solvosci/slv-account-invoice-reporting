@@ -83,6 +83,12 @@
                     string="Generate Document Manager"
                     type="object"
                     attrs="{'invisible': ['|', ('id', '=', False), '|',('ref', '=', False), '|',('state', '!=', 'posted'), ('state_complete_proceesing', '=', 'approved')]}"/>
+                <button 
+                    name="create_dms_file_document_manager"
+                    string="Generate Document Manager with validation"
+                    type="object"
+                    context="{'create_dms_file_document_validate': True}"
+                    attrs="{'invisible': ['|', ('id', '=', False), '|',('ref', '=', False), '|',('state', '!=', 'posted'), ('state_complete_proceesing', '=', 'approved')]}"/>
             </xpath>
         </field>
     </record>
