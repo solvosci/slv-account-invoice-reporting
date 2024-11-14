@@ -6,5 +6,6 @@ bank-payment
 server-auth
 server-env
 slv-sale https://github.com/solvosci/slv-sale
-slv-stock-priv
+slv-stock-priv https://github.com/solvosci/slv-stock-priv
+slv-reports https://github.com/solvosci/slv-reports
 dms
