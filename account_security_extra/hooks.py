@@ -7,3 +7,4 @@ from odoo import SUPERUSER_ID, api
 def uninstall_hook(cr, registry, vals=None):
     env = api.Environment(cr, SUPERUSER_ID, {})
     env.ref("account.menu_action_account_form").parent_id = env.ref("account.account_account_menu").id
+    env.ref("account.menu_action_payment_term_form").parent_id = env.ref("account.account_invoicing_menu").id
