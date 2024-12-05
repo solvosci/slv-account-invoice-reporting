@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_payment_mode.account_payment_mode_menu" model="ir.ui.menu">
+        <field name="parent_id" ref="account.menu_finance_entries_management" />
+    </record>
+
+</odoo>
