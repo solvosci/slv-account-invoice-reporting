@@ -1,0 +1,2 @@
+- Change the menu position "Invoicing/Configuration/Payment Mode" to "Invoicing/Accounting/Management/Payment Mode"
+- In group Account User adds write and create permission to account.payment.mode 
