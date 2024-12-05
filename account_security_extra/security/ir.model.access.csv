@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_account_account_user,account.account user,account.model_account_account,account.group_account_user,1,1,1,0
+access_account_payment_term,account.payment.term account user extra access,account.model_account_payment_term,account.group_account_user,1,1,1,0
+access_account_payment_term_line,account.payment.term.line account user extra access,account.model_account_payment_term_line,account.group_account_user,1,1,1,0

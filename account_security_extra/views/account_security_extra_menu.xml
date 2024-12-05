@@ -6,4 +6,8 @@
         <field name="parent_id" ref="account.menu_finance_entries_management" />
     </record>
 
+    <record id="account.menu_action_payment_term_form" model="ir.ui.menu">
+        <field name="parent_id" ref="account.menu_finance_entries_management" />
+    </record>
+
 </odoo>
