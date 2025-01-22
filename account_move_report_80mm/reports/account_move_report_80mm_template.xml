@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document" primary="True">
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute name="t-call">web.basic_layout</attribute>
+        </xpath>
+        <xpath expr="//t[@t-set='address']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//table/.." position="attributes">
+            <attribute name="style">padding-top: 20px; font-size: 10px</attribute>
+        </xpath>
+        <xpath expr="//h2" position="attributes">
+            <attribute name="style">font-size: 20px</attribute>
+        </xpath>
+
+        <xpath expr="//table" position="attributes">
+            <attribute name="style">table-layout: fixed; width: 100%;</attribute>
+        </xpath>
+        <xpath expr="//thead" position="attributes">
+            <attribute name="style">display: table-row-group;</attribute>
+        </xpath>
+
+        <xpath expr="//th[@name='th_description']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+        <xpath expr="//td[@name='account_invoice_line_name']" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+
+        <xpath expr="//t[@name='account_invoice_line_accountable']/.." position="before">
+            <t t-if="not line.display_type">
+                <tr class="bg-200 font-weight-bold o_line_section">
+                    <td colspan="4">
+                        <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+        
+        <xpath expr="//tr/t[2]/td" position="attributes">
+            <attribute name="colspan">4</attribute>
+        </xpath>
+        <xpath expr="//tr/t[3]/td" position="attributes">
+            <attribute name="colspan">4</attribute>
+        </xpath>
+        <xpath expr="//span[@t-esc='current_subtotal']/.." position="attributes">
+            <attribute name="colspan">4</attribute>
+        </xpath>
+    </template>
+
+    <template id="report_invoice_with_payments" inherit_id="account.report_invoice_with_payments" primary="True">
+        <xpath expr="//t[@t-call='account.report_invoice_document']" position="attributes">
+            <attribute name="t-call">account_move_report_80mm.report_invoice_document</attribute>
+        </xpath>
+    </template>
+
+</odoo>
