@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_move_ticket" model="report.paperformat">
+        <field name="name">Account Move Ticket 80mm</field>
+        <field name="default" eval="True" />
+        <field name="format">custom</field>
+        <field name="page_height">5</field>
+        <field name="page_width">80</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">1</field>
+        <field name="margin_right">1</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_account_move_pdf" model="ir.actions.report">
+        <field name="name">Account Move Ticket</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account_move_report_80mm.report_invoice_with_payments</field>
+        <field name="report_file">account_move_report_80mm.report_invoice_with_payments</field>
+        <field name="paperformat_id" ref="account_move_report_80mm.account_move_ticket"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
