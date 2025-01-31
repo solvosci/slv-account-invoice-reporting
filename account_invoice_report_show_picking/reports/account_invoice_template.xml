@@ -1,0 +1,13 @@
+<odoo>
+    <template id="report_invoice_document_without_taxation" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@name='reference']" position="after">
+            <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2" name="picking" t-if="o.picking_ids">
+                <strong>Picking:</strong><br/>
+                <t t-foreach="o.picking_ids" t-as="picking">
+                    <span t-field="picking.name"></span>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
