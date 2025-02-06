@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="action_account_move_validate_complete_processing" model="ir.actions.server">
+        <field name="name">Validate documentation</field>
+        <field name="model_id" ref="model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = model.action_validate_complete_processing()
+        </field>
+    </record>
+
     <record id="action_account_move_approve_complete_processing" model="ir.actions.server">
-        <field name="name">Approve</field>
+        <field name="name">Approve documentation</field>
         <field name="model_id" ref="model_account_move"/>
         <field name="binding_model_id" ref="account.model_account_move" />
         <field name="binding_view_types">list,form</field>
@@ -90,6 +101,9 @@
                     context="{'create_dms_file_document_validate': True}"
                     attrs="{'invisible': ['|', ('id', '=', False), '|',('ref', '=', False), '|',('state', '!=', 'posted'), ('state_complete_proceesing', '=', 'approved')]}"/>
             </xpath>
+            <xpath expr="//group[@id='header_left_group']/field[@name='ref']" position="after">
+                <field name="validator_complete_proceesing_id" attrs="{'invisible': [('type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+            </xpath>
         </field>
     </record>
 
@@ -115,8 +129,10 @@
                 <field name="ocr_doc" />
             </xpath>
             <xpath expr="//filter[@name='due_date']" position="after">
+                <filter name="state_complete_proceesing_my_pending" string="My pending to validate" domain="[('validator_complete_proceesing_id', '=', uid), ('state_complete_proceesing', '=', 'pending')]"/>
                 <separator/>
-                <filter name="state_complete_proceesing_pending" string="Pending to approve" domain="[('state_complete_proceesing', '=', 'pending')]"/>
+                <filter name="state_complete_proceesing_pending" string="Pending" domain="[('state_complete_proceesing', '=', 'pending')]"/>
+                <filter name="state_complete_proceesing_validated" string="Validated" domain="[('state_complete_proceesing', '=', 'validated')]"/>
                 <filter name="state_complete_proceesing_approved" string="Approved" domain="[('state_complete_proceesing', '=', 'approved')]"/>
                 <filter name="state_complete_proceesing_declined" string="Declined" domain="[('state_complete_proceesing', '=', 'declined')]"/>
             </xpath>

@@ -16,10 +16,18 @@
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
                 <button 
+                    name="validate_account_move"
+                    string="Validate"
+                    class="btn-primary"
+                    attrs="{'invisible': [('state_account_move', '!=', 'pending')]}"
+                    type="object"
+                    groups="account_invoice_mgmt_dms.group_invoice_validator"
+                />
+                <button 
                     name="approve_account_move"
                     string="Approve"
                     class="btn-primary"
-                    attrs="{'invisible': [('state_account_move', '!=', 'pending')]}"
+                    attrs="{'invisible': [('state_account_move', 'not in', ['pending', 'validated'])]}"
                     type="object"
                     groups="account_invoice_mgmt_dms.group_invoice_approver"
                 />
@@ -27,9 +35,9 @@
                     name="decline_account_move"
                     string="Decline"
                     class="btn-primary"
-                    attrs="{'invisible': [('state_account_move', '!=', 'pending')]}"
+                    attrs="{'invisible': [('state_account_move', 'not in', ['pending', 'validated'])]}"
                     type="object"
-                    groups="account_invoice_mgmt_dms.group_invoice_approver"
+                    groups="account_invoice_mgmt_dms.group_invoice_validator"
                 />
             </xpath>
             <xpath expr="//page[@name='page_access']" position="after">

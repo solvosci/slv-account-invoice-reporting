@@ -6,3 +6,5 @@ from . import dms_file
 from . import stock_move
 from . import purchase_order
 from . import account_payment_order
+from . import account_payment_mode
+from . import res_partner

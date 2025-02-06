@@ -21,12 +21,25 @@ class AccountMove(models.Model):
     complete_proceesing_id = fields.Many2one('dms.file', compute='_compute_complete_proceesing_id', store=True, readonly=True)
     state_complete_proceesing = fields.Selection([
         ('pending', 'Pending'),
+        ('validated', 'Validated'),
         ('approved', 'Approved'),
         ('declined', 'Declined')
     ], compute='_compute_state_complete_proceesing', store=True)
     decline_reason_complete_proceesing = fields.Char(related='complete_proceesing_id.decline_reason')
     rating_complete_proceesing = fields.Selection(related='complete_proceesing_id.rating', readonly=False)
     note_complete_proceesing = fields.Text(related='complete_proceesing_id.note', readonly=False)
+    validator_complete_proceesing_id = fields.Many2one(
+        comodel_name='res.users',
+        string='Document Validator',
+        domain=lambda self: self._get_group_invoice_validator(),
+    )
+
+    @api.model
+    def _get_group_invoice_validator(self):
+        group = self.env.ref('account_invoice_mgmt_dms.group_invoice_validator', raise_if_not_found=False)
+        if group:
+            return [('groups_id', 'in', group.id)]
+        return []
 
     def _compute_dms_file_count(self):
         for record in self:
@@ -49,7 +62,7 @@ class AccountMove(models.Model):
 
     @api.depends('dms_file_ids')
     def _compute_complete_proceesing_id(self):
-        directory_id = self.env.ref('account_invoice_mgmt_dms.dms_directory_puchase_invoice')
+        directory_id = self.env.ref('account_invoice_mgmt_dms.dms_directory_puchase_invoice', raise_if_not_found=False)
         for record in self:
             if record.dms_file_ids.filtered(lambda x: x.complete_proceeding):
                 record.complete_proceesing_id = record.dms_file_ids.filtered(lambda x: x.complete_proceeding)
@@ -57,6 +70,14 @@ class AccountMove(models.Model):
             purchase_invoice_file = record.dms_file_ids.filtered(lambda x: x.directory_id == directory_id)
             if purchase_invoice_file:
                 record.purchase_invoice_proceesing_id = purchase_invoice_file
+
+    def action_post(self):
+        if self.type in ['in_invoice', 'in_refund', 'in_receipt']:
+            if self.partner_id.validator_complete_proceesing_id and not self.validator_complete_proceesing_id:
+                self.validator_complete_proceesing_id = self.partner_id.validator_complete_proceesing_id
+            if not self.validator_complete_proceesing_id:
+                raise ValidationError(_("You must select a validator"))
+        return super(AccountMove, self).action_post()
 
     def action_dms_files(self):
         ticket_name = self.name
@@ -190,11 +211,20 @@ class AccountMove(models.Model):
         os.remove(compressed_pdf_path)
 
     def action_invoice_register_payment(self):
-        if self.state_complete_proceesing in ['pending', 'declined']:
+        if self.state_complete_proceesing in ['pending', 'validated', 'declined'] and not self.payment_mode_id.skip_invoice_approval:
             raise ValidationError(
-                    _("Must be approved before making payment")
-                )
+                _("Must be approved before making payment")
+            )
         return super(AccountMove, self).action_invoice_register_payment()
+
+    def action_validate_complete_processing(self):
+        active_ids = self.env["account.move"].browse(self._context.get("active_ids", []))
+
+        if not self.env.user.has_group("account_invoice_mgmt_dms.group_invoice_validator") and active_ids.filtered(lambda x: x.validator_complete_proceesing_id != self.env.user):
+            raise ValidationError(_("You don't have permission to validate some selected invoices."))
+
+        invoice_ids = active_ids.filtered(lambda x: x.complete_proceesing_id and x.complete_proceesing_id.state_account_move == 'pending')
+        invoice_ids.complete_proceesing_id.validate_account_move()
 
     def action_approve_complete_processing(self):
         if not self.env.user.has_group("account_invoice_mgmt_dms.group_invoice_approver"):
@@ -216,7 +246,7 @@ class AccountMove(models.Model):
             'target': 'new',
             'type': 'ir.actions.act_window',
         }
-    
+
     def action_download_document(self,field_name,url_field):
         invoice_ids = self.env['account.move'].browse(self._context.get("active_ids", [])).filtered(lambda x: getattr(x, field_name))
         invoice_ids = [str(id) for id in invoice_ids.ids]

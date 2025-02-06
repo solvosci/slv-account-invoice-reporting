@@ -10,8 +10,9 @@ class AccountPaymentOrder(models.Model):
 
 
     def generated2uploaded(self):
-        pending_invoice_ids = self.payment_line_ids.move_line_id.move_id.filtered(lambda x: x.state_complete_proceesing in ['pending', 'declined'])
-        if pending_invoice_ids:
+        pending_invoice_ids = self.payment_line_ids.move_line_id.move_id.filtered(lambda x: x.state_complete_proceesing in ['pending', 'validated', 'declined'])
+        requires_invoice_approval = self.payment_line_ids.move_line_id.move_id.filtered(lambda x: not x.payment_mode_id.skip_invoice_approval)
+        if pending_invoice_ids and requires_invoice_approval:
             raise ValidationError(
                     _("Before making payment, the following invoices must be approved: %s") % (', '.join(invoice.name for invoice in pending_invoice_ids))
                 )
