@@ -7,12 +7,13 @@
     """,
     "author": "Solvos",
     "license": "LGPL-3",
-    "version": "15.0.1.0.0",
+    "version": "15.0.1.1.0",
     'category': "Accounting & Finance",
     "website": "https://github.com/solvosci/slv-account",
     "depends": ["analytic"],
     "data": [
-        "security/account_security.xml"
+        "security/account_security.xml",
+        "views/analytic_account_views.xml",
     ],
     'installable': True,
 }
