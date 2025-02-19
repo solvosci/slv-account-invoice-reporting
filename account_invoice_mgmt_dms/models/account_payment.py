@@ -13,7 +13,10 @@ class AccountPayment(models.Model):
         if not active_ids:
             return ''
         # ('type', '=', 'in_invoice')
-        if self.env['account.move'].browse(active_ids).filtered(lambda x: x.state_complete_proceesing in ['pending', 'declined']):
+        invoice_ids = self.env['account.move'].browse(active_ids)
+        pending_invoice_ids = invoice_ids.filtered(lambda x: x.state_complete_proceesing in ['pending', 'validated', 'declined'])
+        requires_invoice_approval = invoice_ids.filtered(lambda x: not x.payment_mode_id.skip_invoice_approval)
+        if pending_invoice_ids and requires_invoice_approval:
             raise ValidationError(
                     _("Must be approved before making payment")
                 )

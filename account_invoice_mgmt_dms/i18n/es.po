@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-26 08:32+0000\n"
-"PO-Revision-Date: 2024-08-26 08:32+0000\n"
+"POT-Creation-Date: 2025-02-19 09:31+0000\n"
+"PO-Revision-Date: 2025-02-19 09:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,6 @@ msgstr "Factura"
 
 #. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
-#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #, python-format
 msgid "Add Extra Docs"
 msgstr "Adjuntar documentos adicionales"
@@ -45,7 +44,6 @@ msgstr "Adjuntar documentos adicionales"
 
 #. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
-#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_dms_file_wizard
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_form_inherit
 #, python-format
@@ -53,14 +51,7 @@ msgid "Add Partner Invoice"
 msgstr "Adjuntar factura de proveedor"
 
 #. module: account_invoice_mgmt_dms
-#: model:res.groups,name:account_invoice_mgmt_dms.group_invoice_approver
-msgid "Allow Approve and Decline Invoices"
-msgstr "Permite aprobar o rechazar facturas"
-
-#. module: account_invoice_mgmt_dms
-#: model:ir.actions.server,name:account_invoice_mgmt_dms.action_account_move_approve_complete_processing
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_massive_confirm_wizard_view_form
-#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_mavise_confirm_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_dms_file_form_inherit
 msgid "Approve"
 msgstr "Aprobar"
@@ -72,6 +63,11 @@ msgid "Approve Invoice"
 msgstr "Factura aprobada"
 
 #. module: account_invoice_mgmt_dms
+#: model:ir.actions.server,name:account_invoice_mgmt_dms.action_account_move_approve_complete_processing
+msgid "Approve documentation"
+msgstr "Aprobar documentación"
+
+#. module: account_invoice_mgmt_dms
 #: model:ir.model.fields.selection,name:account_invoice_mgmt_dms.selection__account_move__state_complete_proceesing__approved
 #: model:ir.model.fields.selection,name:account_invoice_mgmt_dms.selection__dms_file__state_account_move__approved
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_search_inherit
@@ -79,7 +75,11 @@ msgid "Approved"
 msgstr "Aprobada"
 
 #. module: account_invoice_mgmt_dms
-#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
+#: model:res.groups,name:account_invoice_mgmt_dms.group_invoice_approver
+msgid "Approver"
+msgstr "Aprobador"
+
+#. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #, python-format
 msgid "Are you sure you want to approve the following invoices?"
@@ -96,11 +96,11 @@ msgstr "Documento"
 #: code:addons/account_invoice_mgmt_dms/models/account_payment_order.py:0
 #, python-format
 msgid "Before making payment, the following invoices must be approved: %s"
-msgstr "Antes de efectuar el pago, deben aprobarse las siguientes facturas: %s"
+msgstr ""
+"Antes de efectuar el pago, deben aprobarse las siguientes facturas: %s"
 
 #. module: account_invoice_mgmt_dms
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_massive_confirm_wizard_view_form
-#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.account_move_assign_mavise_confirm_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_dms_extra_file_wizard
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_dms_file_wizard
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_dms_file_decline_account_move_wizard
@@ -119,7 +119,6 @@ msgstr ""
 "- %s"
 
 #. module: account_invoice_mgmt_dms
-#: code:addons/account_invoice_mgmt_dms/models/stock_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/stock_move.py:0
 #, python-format
 msgid "Carrier Doc"
@@ -141,6 +140,11 @@ msgid "Complete Proceesing"
 msgstr "Expediente completo"
 
 #. module: account_invoice_mgmt_dms
+#: model:ir.model,name:account_invoice_mgmt_dms.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: account_invoice_mgmt_dms
 #: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_account_move_assign_massive_confirm_wizard__create_uid
 #: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_account_move_dms_extra_file_wizard__create_uid
 #: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_account_move_dms_file_wizard__create_uid
@@ -159,7 +163,6 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: account_invoice_mgmt_dms
-#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_form_inherit
 #, python-format
@@ -204,6 +207,12 @@ msgid "Declined"
 msgstr "Rechazada"
 
 #. module: account_invoice_mgmt_dms
+#: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_res_partner__validator_complete_proceesing_id
+#: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_res_users__validator_complete_proceesing_id
+msgid "Default Document Validator"
+msgstr "Validador de documentación por defecto"
+
+#. module: account_invoice_mgmt_dms
 #: model:ir.model,name:account_invoice_mgmt_dms.model_dms_directory
 msgid "Directory"
 msgstr "Carpeta"
@@ -242,6 +251,16 @@ msgid "Doc State"
 msgstr "Estado DOC"
 
 #. module: account_invoice_mgmt_dms
+#: model:ir.module.category,name:account_invoice_mgmt_dms.module_invoice_dms_category
+msgid "Document Invoicing"
+msgstr "Documentos de factura"
+
+#. module: account_invoice_mgmt_dms
+#: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_account_move__validator_complete_proceesing_id
+msgid "Document Validator"
+msgstr "Validador de documentos"
+
+#. module: account_invoice_mgmt_dms
 #: model:ir.actions.server,name:account_invoice_mgmt_dms.action_account_move_download_complete_proceesing
 msgid "Download Complete Proceesing"
 msgstr "Descargar expediente completo"
@@ -252,6 +271,16 @@ msgid "Download Purchase Invoice"
 msgstr "Descargar factura de compra"
 
 #. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
+#, python-format
+msgid ""
+"Error in files: %s \n"
+" Must uploaded again"
+msgstr ""
+"Error en los archivos: %s \n"
+" Pruebe a subirlos de nuevo"
+
+#. module: account_invoice_mgmt_dms
 #: model:ir.model,name:account_invoice_mgmt_dms.model_dms_file
 msgid "File"
 msgstr "Documento"
@@ -260,6 +289,11 @@ msgstr "Documento"
 #: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_form_inherit
 msgid "Generate Document Manager"
 msgstr "Generar documentación"
+
+#. module: account_invoice_mgmt_dms
+#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_form_inherit
+msgid "Generate Document Manager with validation"
+msgstr "Generar documentación con validaciones"
 
 #. module: account_invoice_mgmt_dms
 #: model:ir.model.fields.selection,name:account_invoice_mgmt_dms.selection__dms_file__rating__2
@@ -345,7 +379,6 @@ msgstr "Guardar"
 
 #. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/stock_move.py:0
-#: code:addons/account_invoice_mgmt_dms/models/stock_move.py:0
 #, python-format
 msgid "Link Scale Weight with DMS"
 msgstr "Adjuntar documentación trasporte"
@@ -362,18 +395,22 @@ msgstr "Administrador"
 
 #. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
-#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #: code:addons/account_invoice_mgmt_dms/models/account_payment.py:0
 #, python-format
 msgid "Must be approved before making payment"
 msgstr "Debe aprobarse la factura antes de efectuar el pago"
 
 #. module: account_invoice_mgmt_dms
-#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
+#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_search_inherit
+msgid "My pending to validate"
+msgstr "Mis pedendientes para validar"
+
+#. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #, python-format
 msgid "No selected invoice has the supplier invoice stored"
-msgstr "Ningún registro seleccionado tiene almacenada una Factura del proveedor"
+msgstr ""
+"Ningún registro seleccionado tiene almacenada una Factura del proveedor"
 
 #. module: account_invoice_mgmt_dms
 #: model:ir.model.fields.selection,name:account_invoice_mgmt_dms.selection__dms_file__rating__1
@@ -393,6 +430,11 @@ msgid "Page %s: %s <br/><br/>"
 msgstr "Página %s: %s <br/><br/>"
 
 #. module: account_invoice_mgmt_dms
+#: model:ir.model,name:account_invoice_mgmt_dms.model_account_payment_mode
+msgid "Payment Modes"
+msgstr "Modos de pago"
+
+#. module: account_invoice_mgmt_dms
 #: model:ir.model,name:account_invoice_mgmt_dms.model_account_payment_order
 msgid "Payment Order"
 msgstr "Orden de pago"
@@ -405,13 +447,9 @@ msgstr "Pagos"
 #. module: account_invoice_mgmt_dms
 #: model:ir.model.fields.selection,name:account_invoice_mgmt_dms.selection__account_move__state_complete_proceesing__pending
 #: model:ir.model.fields.selection,name:account_invoice_mgmt_dms.selection__dms_file__state_account_move__pending
+#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_search_inherit
 msgid "Pending"
 msgstr "Pendiente"
-
-#. module: account_invoice_mgmt_dms
-#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_search_inherit
-msgid "Pending to approve"
-msgstr "Pendiente de aprobación"
 
 #. module: account_invoice_mgmt_dms
 #: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_purchase_order__post_portal
@@ -457,6 +495,11 @@ msgid "Save"
 msgstr "Guardar"
 
 #. module: account_invoice_mgmt_dms
+#: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_account_payment_mode__skip_invoice_approval
+msgid "Skip Invoice Approval"
+msgstr "Saltar aprobación de factura"
+
+#. module: account_invoice_mgmt_dms
 #: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_account_move__state_complete_proceesing
 #: model:ir.model.fields,field_description:account_invoice_mgmt_dms.field_account_move_line__state_complete_proceesing
 msgid "State Complete Proceesing"
@@ -484,6 +527,34 @@ msgid "Upload Carrier Documentation"
 msgstr "Adjuntar documentación trasporte"
 
 #. module: account_invoice_mgmt_dms
+#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_dms_file_form_inherit
+msgid "Validate"
+msgstr "Validar"
+
+#. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/dms_file.py:0
+#, python-format
+msgid "Validate Invoice"
+msgstr "Validar factura"
+
+#. module: account_invoice_mgmt_dms
+#: model:ir.actions.server,name:account_invoice_mgmt_dms.action_account_move_validate_complete_processing
+msgid "Validate documentation"
+msgstr "Validar documentación"
+
+#. module: account_invoice_mgmt_dms
+#: model:ir.model.fields.selection,name:account_invoice_mgmt_dms.selection__account_move__state_complete_proceesing__validated
+#: model:ir.model.fields.selection,name:account_invoice_mgmt_dms.selection__dms_file__state_account_move__validated
+#: model_terms:ir.ui.view,arch_db:account_invoice_mgmt_dms.view_account_move_search_inherit
+msgid "Validated"
+msgstr "Validada"
+
+#. module: account_invoice_mgmt_dms
+#: model:res.groups,name:account_invoice_mgmt_dms.group_invoice_validator
+msgid "Validator"
+msgstr "Validador"
+
+#. module: account_invoice_mgmt_dms
 #: model:ir.model.fields.selection,name:account_invoice_mgmt_dms.selection__dms_file__rating__3
 msgid "Very Hight"
 msgstr "Muy alta"
@@ -501,19 +572,42 @@ msgstr "Sin documentación"
 
 #. module: account_invoice_mgmt_dms
 #: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
-#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
 #, python-format
 msgid "You don't have permission to approve invoices."
 msgstr "No tiene permiso para aprobar facturas."
 
 #. module: account_invoice_mgmt_dms
-#: model:ir.model,name:account_invoice_mgmt_dms.model_account_move_assign_massive_confirm_wizard
-msgid "account.move.assign.massive.confirm.wizard"
-msgstr ""
+#: code:addons/account_invoice_mgmt_dms/models/dms_file.py:0
+#: code:addons/account_invoice_mgmt_dms/models/dms_file.py:0
+#, python-format
+msgid "You don't have permission to decline this invoice."
+msgstr "No tiene permisos para rechazar esta factura."
 
 #. module: account_invoice_mgmt_dms
-#: model:ir.model,name:account_invoice_mgmt_dms.model_account_move_assign_mavise_confirm_wizard
-msgid "account.move.assign.mavise.confirm.wizard"
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
+#, python-format
+msgid "You don't have permission to validate some selected invoices."
+msgstr "No tiene permisos para validar alguna factura seleccionada."
+
+#. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/dms_file.py:0
+#, python-format
+msgid ""
+"You don't have permission to validate this invoice, only can validate the "
+"user: %s"
+msgstr ""
+"No tiene permisos para validar esta factura, solo puede validarla el "
+"usuario: %s"
+
+#. module: account_invoice_mgmt_dms
+#: code:addons/account_invoice_mgmt_dms/models/account_move.py:0
+#, python-format
+msgid "You must select a validator"
+msgstr "Debe seleccionar un validador"
+
+#. module: account_invoice_mgmt_dms
+#: model:ir.model,name:account_invoice_mgmt_dms.model_account_move_assign_massive_confirm_wizard
+msgid "account.move.assign.massive.confirm.wizard"
 msgstr ""
 
 #. module: account_invoice_mgmt_dms
